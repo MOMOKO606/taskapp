@@ -3,7 +3,9 @@
 <?= $this->section("title") ?>  Hahaha!  <?= $this->endSection() ?>
 
 <?= $this->section("content") ?>
-<h1> Task1 </h1>
+<h1> Task </h1>
+
+<a href="<?= site_url("/tasks")?>">&laquo; back to index</a>
 
 <dl>
     <dt> ID </dt>
