@@ -2,6 +2,9 @@
 
 namespace App\Controllers;
 
+use App\Entities\Task;
+use http\Env\Request;
+
 class Tasks extends BaseController
 {
     public function getIndex()
@@ -24,7 +27,7 @@ class Tasks extends BaseController
     }
 
     public function getNew(){
-        $task = new \App\Entities\Task;
+        $task = new Task;
 
         return view("Tasks/new", [
             "task" => $task
@@ -34,18 +37,16 @@ class Tasks extends BaseController
     public function postCreate(){
         $model = new \App\Models\TaskModel;
 
-        $result = $model -> insert([
-            "description" => $this -> request -> getPost("description")
-        ]);
+        $task = new Task($this -> request -> getPost() );
 
-        if ($result === false){
-            return redirect() -> back()
-                              -> with("errors", $model -> errors())
-                              -> with("warning", "Invalid data")
-                              -> withInput();
+        if ($model -> insert($task)){
+            return redirect() -> to("tasks/show/{$model -> insertID}")
+                -> with("info", "Task created successfully");
         }else{
-            return redirect() -> to("tasks/show/$result")
-                              -> with("info", "Task created successfully");
+            return redirect() -> back()
+                -> with("errors", $model -> errors())
+                -> with("warning", "Invalid data")
+                -> withInput();
         }
     }
 
