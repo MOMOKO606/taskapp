@@ -7,10 +7,12 @@ class Tasks extends BaseController
     public function getIndex()
     {
         $model = new \App\Models\TaskModel;
+
         $data = $model -> findAll();
 
         return view("Tasks/index", ['tasks' => $data ]);
     }
+
 
     public function getShow($id){
 
@@ -19,11 +21,12 @@ class Tasks extends BaseController
         $data = $model -> find( $id );
 
         return view("Tasks/show", ['task' => $data ]);
-
     }
 
     public function getNew(){
-        return view("Tasks/new");
+        return view("Tasks/new", [
+            "task" => ["description" => ""]
+        ]);
     }
 
     public function postCreate(){
@@ -68,10 +71,5 @@ class Tasks extends BaseController
                               -> with("warning", "Invalid data")
                               -> withInput();
         }
-
-
-
-
-
     }
 }

@@ -12,7 +12,6 @@
         <a href= "<?= site_url("/tasks/show/" . $task["id"])?>">
         <?=  esc($task["description"]) ?>
         </a>
-
     </li>
     <?php endforeach; ?>
 </ul>
