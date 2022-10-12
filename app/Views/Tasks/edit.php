@@ -14,12 +14,12 @@
     </ul>
 <?php endif ?>
 
-<?= form_open("/tasks/update/" . $task["id"])?>
+<?= form_open("/tasks/update/" . $task -> id)?>
 
 <?= $this -> include("Tasks/form") ?>
 
 <button>Save</button>
-<a href="<?= site_url("/tasks/show/" . $task["id"])?>">Cancel</a>
+<a href="<?= site_url("/tasks/show/" . $task -> id)?>">Cancel</a>
 </form>
 
 <?= $this->endSection() ?>

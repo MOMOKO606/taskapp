@@ -9,8 +9,8 @@
 <ul>
     <?php foreach ($tasks as $task): ?>
     <li>
-        <a href= "<?= site_url("/tasks/show/" . $task["id"])?>">
-        <?=  esc($task["description"]) ?>
+        <a href= "<?= site_url("/tasks/show/" . $task -> id)?>">
+        <?=  esc($task -> description) ?>
         </a>
     </li>
     <?php endforeach; ?>

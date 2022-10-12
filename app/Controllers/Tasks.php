@@ -24,8 +24,10 @@ class Tasks extends BaseController
     }
 
     public function getNew(){
+        $task = new \App\Entities\Task;
+
         return view("Tasks/new", [
-            "task" => ["description" => ""]
+            "task" => $task
         ]);
     }
 
