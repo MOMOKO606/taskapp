@@ -7,11 +7,14 @@ use http\Env\Request;
 
 class Tasks extends BaseController
 {
+    public function _construct(){
+        $this -> model = new \App\Models\TaskModel;
+    }
+
     public function getIndex()
     {
-        $model = new \App\Models\TaskModel;
 
-        $data = $model -> findAll();
+        $data = $this -> model -> findAll();
 
         return view("Tasks/index", ['tasks' => $data ]);
     }
@@ -19,9 +22,7 @@ class Tasks extends BaseController
 
     public function getShow($id){
 
-        $model = new \App\Models\TaskModel;
-
-        $data = $model -> find( $id );
+        $data = $this -> model -> find( $id );
 
         return view("Tasks/show", ['task' => $data ]);
     }
@@ -39,8 +40,8 @@ class Tasks extends BaseController
 
         $task = new Task($this -> request -> getPost() );
 
-        if ($model -> insert($task)){
-            return redirect() -> to("tasks/show/{$model -> insertID}")
+        if ($this -> model -> insert($task)){
+            return redirect() -> to("tasks/show/{$this -> model -> insertID}")
                 -> with("info", "Task created successfully");
         }else{
             return redirect() -> back()
@@ -51,32 +52,30 @@ class Tasks extends BaseController
     }
 
     public function getEdit($id){
-        $model = new \App\Models\TaskModel;
 
-        $task = $model -> find($id);
+        $task = $this -> model -> find($id);
 
         return view("tasks/edit", ["task" => $task]);
     }
 
     public function postUpdate($id){
-        $model = new \App\Models\TaskModel;
 
 //        $result = $model -> update($id, [
 //           "description" => $this -> request -> getPost("description")
 //        ]);
 
-        $task = $model -> find($id);
+        $task = $this -> model -> find($id);
 
         $task -> fill($this -> request -> getPost());
 
         if( !$task -> hasChanged()){
             return redirect() -> back()
-                -> with("error", $model -> errors())
+                -> with("error", $this -> model -> errors())
                 -> with("warning", "Nothing to update")
                 -> withInput();
         }
 
-        if ( $model -> save($task)){
+        if ( $this -> model -> save($task)){
             return redirect() -> to("/tasks/show/$id")
                 -> with("info", "Task updated successfully!");
         }else{
