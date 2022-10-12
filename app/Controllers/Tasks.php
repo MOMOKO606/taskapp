@@ -36,7 +36,8 @@ class Tasks extends BaseController
         if ($result === false){
             return redirect() -> back()
                               -> with("errors", $model -> errors())
-                              -> with("warning", "Invalid data");
+                              -> with("warning", "Invalid data")
+                              -> withInput();
         }else{
             return redirect() -> to("tasks/show/$result")
                               -> with("info", "Task created successfully");
@@ -54,12 +55,23 @@ class Tasks extends BaseController
     public function postUpdate($id){
         $model = new \App\Models\TaskModel;
 
-        $model -> update($id, [
+        $result = $model -> update($id, [
            "description" => $this -> request -> getPost("description")
         ]);
 
-        return redirect() -> to("/tasks/show/$id")
-                          -> with("info", "Task updated successfully!");
+        if ($result){
+            return redirect() -> to("/tasks/show/$id")
+                -> with("info", "Task updated successfully!");
+        }else{
+            return redirect() -> back()
+                              -> with("error", $model -> errors())
+                              -> with("warning", "Invalid data")
+                              -> withInput();
+        }
+
+
+
+
 
     }
 }
