@@ -21,5 +21,6 @@
     <dd><?= $task["updated_at"]?></dd>
 </dl>
 
+<a href="<?= site_url("/tasks/edit/" . $task["id"])?>"> Edit</a>
 
 <?= $this->endSection() ?>

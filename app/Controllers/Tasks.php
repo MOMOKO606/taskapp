@@ -42,4 +42,16 @@ class Tasks extends BaseController
                               -> with("info", "Task created successfully");
         }
     }
+
+    public function getEdit($id){
+        $model = new \App\Models\TaskModel;
+
+        $task = $model -> find($id);
+
+        return view("tasks/edit", ["task" => $task]);
+    }
+
+    public function update(){
+
+    }
 }
