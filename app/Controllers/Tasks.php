@@ -7,9 +7,11 @@ use http\Env\Request;
 
 class Tasks extends BaseController
 {
-    public function _construct(){
+    public function __construct()
+    {
         $this -> model = new \App\Models\TaskModel;
     }
+
 
     public function getIndex()
     {
@@ -22,9 +24,9 @@ class Tasks extends BaseController
 
     public function getShow($id){
 
-        $data = $this -> model -> find( $id );
+        $task = $this -> getTaskOr404($id);
 
-        return view("Tasks/show", ['task' => $data ]);
+        return view("Tasks/show", ['task' => $task ]);
     }
 
     public function getNew(){
@@ -53,7 +55,7 @@ class Tasks extends BaseController
 
     public function getEdit($id){
 
-        $task = $this -> model -> find($id);
+        $task = $this -> getTaskOr404($id);
 
         return view("tasks/edit", ["task" => $task]);
     }
@@ -64,7 +66,7 @@ class Tasks extends BaseController
 //           "description" => $this -> request -> getPost("description")
 //        ]);
 
-        $task = $this -> model -> find($id);
+        $task = $this -> getTaskOr404($id);
 
         $task -> fill($this -> request -> getPost());
 
@@ -83,5 +85,15 @@ class Tasks extends BaseController
                               -> with("warning", "Invalid data")
                               -> withInput();
         }
+    }
+
+    private function getTaskOr404($id){
+        $task = $this -> model -> find( $id );
+
+        if ($task == null){
+            throw new \CodeIgniter\Exceptions\PageNotFoundException("Task with id $id not found");
+        }
+
+        return $task;
     }
 }
