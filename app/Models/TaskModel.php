@@ -9,6 +9,8 @@ class TaskModel extends \CodeIgniter\Model{
 
     protected $returnType = "App\Entities\Task";
 
+    protected $useTimestamps = true;
+
     protected $validationRules = [
         "description" => "required"
     ];
