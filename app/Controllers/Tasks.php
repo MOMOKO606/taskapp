@@ -87,6 +87,24 @@ class Tasks extends BaseController
         }
     }
 
+
+    public function getDelete($id){
+        $task = $this ->getTaskOr404($id);
+
+        return view("Tasks/delete", ["task" => $task]);
+
+    }
+
+    public function postDelete($id){
+        $task = $this->getTaskOr404($id);
+
+        $this->model->delete($id);
+
+        return redirect()->to('/tasks')
+            ->with('info', 'Task deleted');
+    }
+
+
     private function getTaskOr404($id){
         $task = $this -> model -> find( $id );
 
@@ -96,4 +114,6 @@ class Tasks extends BaseController
 
         return $task;
     }
+
+
 }
