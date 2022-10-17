@@ -8,4 +8,7 @@
     </h1>
 
     <a href = "<?=site_url("/signup")?>">Sign up</a>
+
+    <a href = "<?=site_url("/login")?>">Log in</a>
+
 <?= $this->endSection() ?>
