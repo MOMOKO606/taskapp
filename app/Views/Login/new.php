@@ -6,7 +6,7 @@
 
 <h1>Login</h1>
 
-<?= form_open("/login/create") ?>
+<?= form_open("/login") ?>
 
 <div>
     <label for="email">email</label>

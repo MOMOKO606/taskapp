@@ -16,7 +16,7 @@ class Signup extends BaseController{
         $model = new \App\Models\UserModel;
 
         //  把Entity实例插入数据库实例。
-        //  如果插入成功¥sentinel为真，否则为假。
+        //  如果插入成功$sentinel为真，否则为假。
         $sentinel = $model->insert($user);
 
         if ($sentinel) {
