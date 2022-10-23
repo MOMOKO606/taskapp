@@ -13,7 +13,7 @@
 
         <p>User is logged in</p>
 
-        <a href="<?= site_url("/logout") ?>">Log out</a>
+        <a href="<?= site_url("/logout/delete") ?>">Log out</a>
 
     <?php else: ?>
 
