@@ -14,34 +14,18 @@ class Login extends BaseController
         $email = $this->request->getPost('email');
         $password = $this->request->getPost('password');
 
-        $model = new \App\Models\UserModel;
+        $auth = new \App\Libraries\Authentication;
 
-        $user = $model->where('email', $email)
-            ->first();
+        if ($auth -> login($email, $password)){
+            return redirect() -> to("/")
+                // flash message，刷新就会消失。
+                -> with("info", "Login successful");
 
-        if ($user === null) {
-
+        }else{
             return redirect()->back()
                 ->withInput()
-                ->with('warning', 'User not found');
+                ->with('warning', 'Invalid login');
 
-        } else {
-
-            if (password_verify($password, $user->password_hash)) {
-
-                $session = session();
-                $session -> set("user_id", $user -> id);
-                return redirect() -> to("/")
-                                  // flash message，刷新就会消失。
-                                  -> with("info", "Login successful");
-
-
-            } else {
-
-                return redirect()->back()
-                    ->withInput()
-                    ->with('warning', 'Incorrect password');
-            }
         }
     }
 
