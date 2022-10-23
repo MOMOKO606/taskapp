@@ -44,5 +44,12 @@ class Login extends BaseController
             }
         }
     }
+
+    public function getDelete()
+    {
+        session()->destroy();
+
+        return redirect()->to('/login/showLogoutMessage');
+    }
 }
 
