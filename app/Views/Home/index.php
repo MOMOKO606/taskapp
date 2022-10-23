@@ -13,6 +13,8 @@
 
         <p>User is logged in</p>
 
+        <p>Hello <?= esc(current_user() -> name)?></p>
+
         <a href="<?= site_url("/logout/delete") ?>">Log out</a>
 
     <?php else: ?>
