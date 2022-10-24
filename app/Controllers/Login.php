@@ -17,9 +17,13 @@ class Login extends BaseController
         $auth = service("auth");
 
         if ($auth -> login($email, $password)){
-            return redirect() -> to("/")
-                // flash message，刷新就会消失。
-                -> with("info", "Login successful");
+            //  从session中取得先前url, 如果值为空则取首页，存放在$redirect_url中
+            $redirect_url = session('redirect_url') ?? '/';
+            //  释放session中的url信息。
+            unset($_SESSION['redirect_url']);
+            //  登录成功后跳转回$redirect_url
+            return redirect()->to($redirect_url)
+                ->with('info', 'Login successful');
 
         }else{
             return redirect()->back()

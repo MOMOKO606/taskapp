@@ -10,6 +10,9 @@ class LoginFilter implements FilterInterface
     {
         if ( ! service('auth')->isLoggedIn()) {
 
+            //  记录下login前的页面到session
+            session()->set('redirect_url', current_url());
+
             return redirect()->to('/login')
                 ->with('info', 'Please login first');
 
