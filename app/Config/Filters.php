@@ -23,6 +23,7 @@ class Filters extends BaseConfig
         'honeypot'      => Honeypot::class,
         'invalidchars'  => InvalidChars::class,
         'secureheaders' => SecureHeaders::class,
+        'login'         => \App\Filters\LoginFilter::class,
     ];
 
     /**
@@ -68,5 +69,8 @@ class Filters extends BaseConfig
      *
      * @var array
      */
-    public $filters = [];
+    //  表示url是tasks开头的，都要用login filter的before method。
+    public $filters = [
+        'login' => ['before' => ['tasks(/*)?']]
+    ];
 }
