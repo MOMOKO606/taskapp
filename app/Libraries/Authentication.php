@@ -8,8 +8,11 @@ class Authentication
     {
         $model = new \App\Models\UserModel;
 
-        $user = $model->where('email', $email)
-            ->first();
+        //  这句可以更清晰一些，即把数据库的操作全放在model中，我们通过调用model中的function来得到想要的结果。
+//        $user = $model->where('email', $email)
+//            ->first();
+        //  $user其实是table的一行，即它是一个Entity/User的实例。
+        $user = $model -> findByEmail($email);
 
         if ($user === null) {
 
@@ -17,7 +20,7 @@ class Authentication
 
         }
 
-        if ( ! password_verify($password, $user->password_hash)) {
+        if ( ! $user -> verifyPassWord($password) ) {
 
             return false;
 
