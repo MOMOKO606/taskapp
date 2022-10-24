@@ -4,6 +4,9 @@ namespace App\Libraries;
 
 class Authentication
 {
+    // 初值为null的cache。
+    private $user;
+
     public function login($email, $password)
     {
         $model = new \App\Models\UserModel;
@@ -46,9 +49,14 @@ class Authentication
 
         }
 
-        $model = new \App\Models\UserModel;
+        if ($this->user === null) {
 
-        return $model->find(session()->get('user_id'));
+            $model = new \App\Models\UserModel;
+
+            $this->user = $model->find(session()->get('user_id'));
+        }
+
+        return $this->user;
     }
 }
 
