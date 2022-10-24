@@ -14,7 +14,7 @@ class Login extends BaseController
         $email = $this->request->getPost('email');
         $password = $this->request->getPost('password');
 
-        $auth = new \App\Libraries\Authentication;
+        $auth = service("auth");
 
         if ($auth -> login($email, $password)){
             return redirect() -> to("/")

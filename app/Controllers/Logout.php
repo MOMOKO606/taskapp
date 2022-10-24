@@ -6,9 +6,8 @@ class Logout extends BaseController
 {
     public function getDelete()
     {
-        $auth = new \App\Libraries\Authentication;
 
-        $auth->logout();
+        service("auth") ->logout();
 
         return redirect()->to('/logout/showLogoutMessage');
     }
