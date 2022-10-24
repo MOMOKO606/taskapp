@@ -15,6 +15,12 @@ class Tasks extends BaseController
 
     public function getIndex()
     {
+        if ( ! service('auth')->isLoggedIn()) {
+
+            return redirect()->to('/login')
+                ->with('info', 'Please login first');
+
+        }
 
         $data = $this -> model -> findAll();
 
