@@ -9,7 +9,7 @@
 
     <a href = "<?=site_url("/signup")?>">Sign up</a>
 
-    <?php if (session()->has('user_id')): ?>
+    <?php if (current_user()): ?>
 
         <p>User is logged in</p>
 

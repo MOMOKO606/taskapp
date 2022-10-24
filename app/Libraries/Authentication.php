@@ -34,5 +34,18 @@ class Authentication
     {
         session()->destroy();
     }
+
+    public function getCurrentUser()
+    {
+        if ( ! session()->has('user_id')) {
+
+            return null;
+
+        }
+
+        $model = new \App\Models\UserModel;
+
+        return $model->find(session()->get('user_id'));
+    }
 }
 
