@@ -14,7 +14,7 @@
 
     <a href="<?= site_url("/tasks") ?>">Tasks</a>
 
-    <a href="<?= site_url("/logout/delete") ?>">Log out</a>
+    <a href="<?= site_url("/logout") ?>">Log out</a>
 
 <?php else: ?>
 

@@ -8,6 +8,7 @@
 
     <a href="<?= site_url("/tasks/new") ?>">New task</a>
 
+
 <?php if ($tasks): ?>
 
     <ul>

@@ -7,6 +7,8 @@ use http\Env\Request;
 
 class Tasks extends BaseController
 {
+    private $model;
+
     public function __construct()
     {
         $this -> model = new \App\Models\TaskModel;
@@ -18,7 +20,7 @@ class Tasks extends BaseController
         $auth = service('auth');
         $user = $auth->getCurrentUser();
 
-        $data = $this->model->getTasksByUserId($user->id);
+        $data = $this->model->getTaskByUserId($user->id);
 
         return view("Tasks/index", ['tasks' => $data]);
     }
@@ -27,6 +29,8 @@ class Tasks extends BaseController
     public function getShow($id){
 
         $task = $this -> getTaskOr404($id);
+
+        dd($id);
 
         return view("Tasks/show", ['task' => $task ]);
     }
@@ -108,10 +112,24 @@ class Tasks extends BaseController
 
 
     private function getTaskOr404($id){
-        $task = $this -> model -> find( $id );
+        $user = service('auth')->getCurrentUser();
 
-        if ($task == null){
+        /*
+        $task = $this->model->find($id);
+
+        if ($task !== null && ($task->user_id !== $user->id)) {
+
+            $task = null;
+
+        }
+        */
+
+        $task = $this->model->getTaskByUserId($id, $user->id);
+
+        if ($task === null) {
+
             throw new \CodeIgniter\Exceptions\PageNotFoundException("Task with id $id not found");
+
         }
 
         return $task;

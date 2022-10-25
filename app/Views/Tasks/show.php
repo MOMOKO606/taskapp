@@ -7,6 +7,8 @@
 
 <a href="<?= site_url("/tasks")?>">&laquo; back to index</a>
 
+<?//= dd($task); ?>
+<!---->
 <dl>
     <dt> ID </dt>
     <dd><?= $task -> id ?></dd>

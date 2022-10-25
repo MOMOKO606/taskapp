@@ -40,6 +40,9 @@ $routes->get('/', 'Home::index');
 $routes->get('/signup', 'Signup::getNew', ['filter' => 'guest']);
 $routes->get('/login', 'Login::getNew', ['filter' => 'guest']);
 $routes->post('/login', 'Login::postCreate');
+$routes->get('/logout', 'Login::getDelete');
+$routes->get('/showLogoutMessage', 'Login::getShowLogoutMessage');
+
 
 
 
