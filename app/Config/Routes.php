@@ -41,6 +41,7 @@ $routes->get('/signup', 'Signup::getNew');
 $routes->get('/login', 'Login::getNew');
 $routes->post('/login', 'Login::postCreate');
 $routes->get('/logout', 'Login::getDelete');
+$routes->get("/showLogoutMessage", "Login::getShowLogoutMessage");
 
 
 

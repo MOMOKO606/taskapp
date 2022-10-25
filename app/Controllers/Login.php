@@ -49,7 +49,14 @@ class Login extends BaseController
     {
         session()->destroy();
 
-        return redirect()->to('/login/showLogoutMessage');
+        return redirect()->to('/showLogoutMessage');
+    }
+
+    public function getShowLogoutMessage()
+    {
+        return redirect() -> to("/")
+                          -> with("info", "Logout successful.");
+
     }
 }
 
