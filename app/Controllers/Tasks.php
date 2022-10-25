@@ -15,16 +15,12 @@ class Tasks extends BaseController
 
     public function getIndex()
     {
-        if ( ! service('auth')->isLoggedIn()) {
+        $auth = service('auth');
+        $user = $auth->getCurrentUser();
 
-            return redirect()->to('/login')
-                ->with('info', 'Please login first');
+        $data = $this->model->getTasksByUserId($user->id);
 
-        }
-
-        $data = $this -> model -> findAll();
-
-        return view("Tasks/index", ['tasks' => $data ]);
+        return view("Tasks/index", ['tasks' => $data]);
     }
 
 

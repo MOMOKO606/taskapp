@@ -19,4 +19,10 @@ class TaskModel extends \CodeIgniter\Model{
         "description" => [
             "required" => "Please enter a description!"]
     ];
+
+    public function getTasksByUserId($id)
+    {
+        return $this->where('user_id', $id)
+            ->findAll();
+    }
 }
