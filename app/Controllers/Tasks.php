@@ -20,7 +20,7 @@ class Tasks extends BaseController
         $auth = service('auth');
         $user = $auth->getCurrentUser();
 
-        $data = $this->model->getTaskByUserId($user->id);
+        $data = $this->model->getTasksByUserId($user->id);
 
         return view("Tasks/index", ['tasks' => $data]);
     }
@@ -29,8 +29,6 @@ class Tasks extends BaseController
     public function getShow($id){
 
         $task = $this -> getTaskOr404($id);
-
-        dd($id);
 
         return view("Tasks/show", ['task' => $task ]);
     }
