@@ -20,9 +20,12 @@ class Tasks extends BaseController
 
     public function getIndex()
     {
-        $data = $this->model->getTasksByUserId($this->current_user->id);
+        $data = $this->model->paginateTasksByUserId($this->current_user->id);
 
-        return view("Tasks/index", ['tasks' => $data]);
+        return view("Tasks/index", [
+            'tasks' => $data,
+            //  分页传入。
+            'pager' => $this ->model->pager]);
     }
 
 

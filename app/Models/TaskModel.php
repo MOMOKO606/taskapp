@@ -20,10 +20,12 @@ class TaskModel extends \CodeIgniter\Model{
             "required" => "Please enter a description!"]
     ];
 
-    public function getTasksByUserId($id)
+    public function paginateTasksByUserId($id)
     {
         return $this->where('user_id', $id)
-            ->findAll();
+                    // 按创建时间排序，注意数据库table中的"created_at"必须有index。
+                    ->orderBy("created_at")
+                    ->paginate(5);
     }
 
     public function getTaskByUserId($id, $user_id)

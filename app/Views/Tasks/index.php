@@ -22,6 +22,7 @@
 
         <?php endforeach; ?>
     </ul>
+    <?= $pager->links()?>
 
 <?php else: ?>
 
