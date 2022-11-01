@@ -33,13 +33,13 @@ class Login extends BaseController
         }
     }
 
+
     public function getDelete()
     {
-
         service("auth") ->logout();
-
         return redirect()->to('/showLogoutMessage');
     }
+
 
     public function getShowLogoutMessage()
     {

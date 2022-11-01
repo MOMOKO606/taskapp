@@ -42,9 +42,11 @@ class Tasks extends BaseController
     }
 
     public function postCreate(){
-        $model = new \App\Models\TaskModel;
-
         $task = new Task($this -> request -> getPost() );
+
+        $user = service("auth") -> getCurrentUser();
+
+        $task -> user_id = $user -> id;
 
         if ($this -> model -> insert($task)){
             return redirect() -> to("tasks/show/{$this -> model -> insertID}")
@@ -65,14 +67,18 @@ class Tasks extends BaseController
     }
 
     public function postUpdate($id){
-
+//     不用Entity， 直接对model中的row进行操作的方法。
 //        $result = $model -> update($id, [
 //           "description" => $this -> request -> getPost("description")
 //        ]);
 
         $task = $this -> getTaskOr404($id);
 
-        $task -> fill($this -> request -> getPost());
+//      安全性Sentinel，如果post进来的数据有user_id就直接删除。
+        $post = $this -> request -> getPost();
+        unset($post["user_id"]);
+
+        $task -> fill($post);
 
         if( !$task -> hasChanged()){
             return redirect() -> back()

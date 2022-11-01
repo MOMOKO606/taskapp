@@ -5,7 +5,7 @@ namespace App\Models;
 class TaskModel extends \CodeIgniter\Model{
     protected $table = "task";
 
-    protected $allowedFields = ["description"];
+    protected $allowedFields = ["description", "user_id"];
 
     protected $returnType = "App\Entities\Task";
 
