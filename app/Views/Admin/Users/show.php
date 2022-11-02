@@ -26,6 +26,12 @@
     </dl>
 
     <a href="<?= site_url('/admin/users/edit/' . $user->id) ?>">Edit</a>
-    <a href="<?= site_url('/admin/users/delete/' . $user->id) ?>">Delete</a>
+
+<!--    检查被展示的用户id和当前登录用户id是否一致-->
+    <?php if ($user->id != current_user()->id): ?>
+
+        <a href="<?= site_url('/admin/users/delete/' . $user->id) ?>">Delete</a>
+
+    <?php endif; ?>
 
 <?= $this->endSection() ?>
