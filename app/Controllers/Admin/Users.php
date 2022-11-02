@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controllers\Admin;
+use App\Entities\User;
 //  此处extends 完整路径+名是因为
 //  如果extends BaseController编译器会在namespace下查找，
 //  即导致not found
@@ -32,6 +33,33 @@ class Users extends \App\Controllers\BaseController
         return view('Admin/Users/show', [
             'user' => $user
         ]);
+    }
+
+    public function getNew()
+    {
+        $user = new User;
+
+        return view('Admin/Users/new', [
+            'user' => $user
+        ]);
+    }
+
+    public function postCreate()
+    {
+        $user = new User($this->request->getPost());
+
+        if ($this->model->insert($user)) {
+
+            return redirect()->to("/admin/users/show/{$this->model->insertID}")
+                ->with('info', 'User created successfully');
+
+        } else {
+
+            return redirect()->back()
+                ->with('errors', $this->model->errors())
+                ->with('warning', 'Invalid data')
+                ->withInput();
+        }
     }
 
     private function getUserOr404($id)
