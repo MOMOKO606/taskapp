@@ -22,4 +22,12 @@
     <input type="password" name="password_confirmation">
 </div>
 
+<div>
+    <label for="is_admin">
+        <!--检查展示用户是否是admin user并给出default值        -->
+        <input type="checkbox" id="is_admin" name="is_admin" value="1"
+               <?php if (old('is_admin', $user->is_admin)): ?>checked<?php endif; ?>> administrator
+    </label>
+</div>
+
 

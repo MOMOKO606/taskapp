@@ -48,6 +48,12 @@ class UserModel extends \CodeIgniter\Model
 
             //  删掉password，保留password_hash。
             unset($data['data']['password']);
+//          捋一捋，databse插入新row时，我们前端需要输入
+//          1. password
+//          2.确认password
+//          但这只是为了安全需要，实际上数据库中不需要“确认password”的信息，且会把“password”，hash完再插入。
+//          所以我们在hash的函数中，直接把1 & 2删除即可。
+            unset($data['data']['password_confirmation']);
         }
 
         return $data;
