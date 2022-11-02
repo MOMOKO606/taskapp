@@ -72,6 +72,10 @@ class Filters extends BaseConfig
      */
     //  表示url是tasks开头的，都要用login filter的before method。
     public $filters = [
-        'login' => ['before' => ['tasks(/*)?']]
+        'login' => [
+            'before' => [
+                'tasks(/*)?',
+                'admin(/*)?']
+        ]
     ];
 }
