@@ -23,6 +23,8 @@
 </div>
 
 <div>
+    <!--小技巧：让checkbox不打勾时传回值。    -->
+    <input type="hidden" name="is_admin" value="0">
     <label for="is_admin">
         <!--检查展示用户是否是admin user并给出default值        -->
         <input type="checkbox" id="is_admin" name="is_admin" value="1"

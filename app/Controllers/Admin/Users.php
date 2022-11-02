@@ -96,7 +96,7 @@ class Users extends \App\Controllers\BaseController
                 ->withInput();
         }
 
-        if ($this->model->save($user)) {
+        if ($this->model->protect(false)->save($user)) {
 
             return redirect()->to("/admin/users/show/$id")
                 ->with('info', 'User updated successfully');
