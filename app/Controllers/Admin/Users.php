@@ -110,6 +110,27 @@ class Users extends \App\Controllers\BaseController
         }
     }
 
+
+    public function getDelete($id)
+    {
+        $user = $this->getUserOr404($id);
+
+        return view("/admin/users/delete", ["user" => $user]);
+
+    }
+
+
+    public function postDelete($id)
+    {
+        $user = $this->getUserOr404($id);
+
+        $this->model->delete($id);
+
+        return redirect()->to('/admin/users')
+                         ->with('info', 'User deleted');
+    }
+
+
     private function getUserOr404($id)
     {
         $user = $this->model->where('id', $id)
