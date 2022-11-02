@@ -62,6 +62,54 @@ class Users extends \App\Controllers\BaseController
         }
     }
 
+    public function getEdit($id)
+    {
+        $user = $this->getUserOr404($id);
+
+        return view('Admin/Users/edit', [
+            'user' => $user
+        ]);
+    }
+
+    public function postUpdate($id)
+    {
+        $user = $this->getUserOr404($id);
+
+        $post = $this->request->getPost();
+
+        //  检查前端返回的表单中password是否为空。
+        if (empty($post['password'])) {
+            //  禁用password validation
+            $this->model->disablePasswordValidation();
+            //  把post中空的password删掉，避免把密码改为了空值。
+            unset($post['password']);
+            unset($post['password_confirmation']);
+        }
+
+        $user->fill($post);
+
+        if ( ! $user->hasChanged()) {
+
+            return redirect()->back()
+                ->with('warning', 'Nothing to update')
+                ->withInput();
+        }
+
+        if ($this->model->save($user)) {
+
+            return redirect()->to("/admin/users/show/$id")
+                ->with('info', 'User updated successfully');
+
+        } else {
+
+            return redirect()->back()
+                ->with('errors', $this->model->errors())
+                ->with('warning', 'Invalid data')
+                ->withInput();
+
+        }
+    }
+
     private function getUserOr404($id)
     {
         $user = $this->model->where('id', $id)

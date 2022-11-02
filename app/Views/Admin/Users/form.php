@@ -1,11 +1,12 @@
 <div>
     <label for="name">Name</label>
-    <input type="text" name="name" id="name" value="<?= old('name') ?>">
+    <!--old()表示上次输入的表单， esc()表示过滤掉含有代码的危险输入。    -->
+    <input type="text" name="name" id="name" value="<?= old('name', esc($user->name)) ?>">
 </div>
 
 <div>
     <label for="email">email</label>
-    <input type="text" name="email" id="email" value="<?= old('email') ?>">
+    <input type="text" name="email" id="email" value="<?= old('email', esc($user->email)) ?>">
 </div>
 
 <div>

@@ -33,6 +33,9 @@ class UserModel extends \CodeIgniter\Model
     //  表示在插入前执行hashPassword callback函数。
     protected $beforeInsert = ['hashPassword'];
 
+    //  表示在update前执行hashPassword callback函数。
+    protected $beforeUpdate = ['hashPassword'];
+
     //  hashPassword callback函数
     //  $data contains the value from the form.
     protected function hashPassword(array $data)
@@ -53,6 +56,12 @@ class UserModel extends \CodeIgniter\Model
     public function findByEmail($email){
         return $this -> where('email', $email)
                      -> first();
+    }
+
+    public function disablePasswordValidation()
+    {
+        unset($this->validationRules['password']);
+        unset($this->validationRules['password_confirmation']);
     }
 
 }
