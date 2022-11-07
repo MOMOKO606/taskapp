@@ -23,6 +23,7 @@ class Signup extends BaseController{
         $sentinel = $model->insert($user);
 
         if ($sentinel) {
+            $this->sendActivationEmail($user);
 
             // 注意习惯，一般post完之后都喜欢跳转到另一界面。
             // 如果直接return到view，则你的url不会发生跳转，是不变的。
@@ -40,6 +41,24 @@ class Signup extends BaseController{
 
     public function getSuccess(){
         return view("Signup/success");
+    }
+
+    private function sendActivationEmail($user)
+    {
+        $email = service('email');
+
+        $email->setTo($user->email);
+
+        $email->setSubject('Account activation');
+
+        //  即发出的邮件内容是个html文件，存放在views/Signup/activation_email
+        $message = view('Signup/activation_email', [
+            'token' => $user->token
+        ]);
+
+        $email->setMessage($message);
+
+        $email->send();
     }
 
 }
