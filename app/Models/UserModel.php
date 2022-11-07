@@ -70,4 +70,24 @@ class UserModel extends \CodeIgniter\Model
         unset($this->validationRules['password_confirmation']);
     }
 
+    public function activateByToken($token)
+    {
+        $token_hash = hash_hmac('sha256', $token, $_ENV['HASH_SECRET_KEY']);
+
+        $user = $this->where('activation_hash', $token_hash)
+            ->first();
+
+        if ($user !== null) {
+
+            //  在entity中activate user。
+            $user->activate();
+
+            //  类似password的操作，不能改allowedField，太危险。
+            //  所以在此禁用。
+            $this->protect(false)
+                ->save($user);
+
+        }
+    }
+
 }

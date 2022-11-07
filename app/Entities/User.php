@@ -18,4 +18,12 @@ class User extends \CodeIgniter\Entity\Entity{
         //  注意key是一个常量，类似于配置，所以要存放到.env中。
         $this-> activation_hash  = hash_hmac('sha256', $this->token, $_ENV['HASH_SECRET_KEY']);
     }
+
+    public function activate()
+    {
+        $this->is_active = true;
+
+        //  No longer need the activation_hash.
+        $this->activation_hash = null;
+    }
 }
