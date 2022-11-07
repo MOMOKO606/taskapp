@@ -12,8 +12,11 @@
         <dt>Name</dt>
         <dd><?= esc($user->name) ?></dd>
 
-        <dt>email</dt>
+        <dt>Email</dt>
         <dd><?= esc($user->email) ?></dd>
+
+        <dt>Active</dt>
+        <dd><?= $user->is_active ? 'yes' : 'no' ?></dd>
 
         <dt>Administrator</dt>
         <dd><?= $user->is_admin ? 'yes' : 'no' ?></dd>

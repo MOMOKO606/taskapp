@@ -14,7 +14,8 @@ class UserSeeder extends Seeder
             'name'     => 'Admin',
             'email'    => 'admin@example.com',
             'password' => 'secret',
-            'is_admin' => true
+            'is_admin' => true,
+            'is_active' => true
         ];
         //  表示在插入前略过validation
         $model->skipValidation(true)
