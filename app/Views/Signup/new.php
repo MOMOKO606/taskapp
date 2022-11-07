@@ -14,7 +14,7 @@
     </ul>
 <?php endif ?>
 
-<?= form_open("/signup/create") ?>
+<?= form_open("/signup") ?>
 
 <div>
     <label for="name">Name</label>

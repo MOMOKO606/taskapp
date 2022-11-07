@@ -15,6 +15,13 @@ class Signup extends BaseController{
         //  建立数据库实例；
         $model = new \App\Models\UserModel;
 
+        //  生成token：随机的16位bytes，并用hex进制表示
+        $token = bin2hex(random_bytes(16));
+        //  对$token用'sha256'算法 和 key进行hash
+        //  注意key是一个常量，类似于配置，所以要存放到.env中。
+        $hash = hash_hmac('sha256', $token, $_ENV['HASH_SECRET_KEY']);
+        dd($hash);
+
         //  把Entity实例插入数据库实例。
         //  如果插入成功$sentinel为真，否则为假。
         $sentinel = $model->insert($user);
