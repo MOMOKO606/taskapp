@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
+use App\Libraries\Token;
+
 class UserModel extends \CodeIgniter\Model
 {
     protected $table = 'user';
 
-    protected $allowedFields = ['name', 'email', 'password', 'activation_hash'];
+    protected $allowedFields = ['name', 'email', 'password', 'activation_hash', 'reset_hash', 'reset_expires_at'];
 
     protected $returnType = 'App\Entities\User';
 
@@ -72,7 +74,10 @@ class UserModel extends \CodeIgniter\Model
 
     public function activateByToken($token)
     {
-        $token_hash = hash_hmac('sha256', $token, $_ENV['HASH_SECRET_KEY']);
+        //  当然也可以写成service
+        $token = new Token($token);
+
+        $token_hash = $token->getHash();
 
         $user = $this->where('activation_hash', $token_hash)
             ->first();
