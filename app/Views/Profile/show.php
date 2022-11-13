@@ -14,4 +14,6 @@
     <dd><?= esc($user->email) ?></dd>
 </dl>
 
+<a href="<?= site_url("/profile/edit") ?>">Edit</a>
+
 <?= $this->endSection() ?>
