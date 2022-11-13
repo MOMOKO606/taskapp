@@ -16,4 +16,6 @@
 
 <a href="<?= site_url("/profile/edit") ?>">Edit</a>
 
+<a href="<?= site_url("/profile/editpassword") ?>">Change password</a>
+
 <?= $this->endSection() ?>

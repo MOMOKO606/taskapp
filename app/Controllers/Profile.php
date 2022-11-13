@@ -50,4 +50,9 @@ class Profile extends BaseController
                 ->withInput();
         }
     }
+
+    public function getEditpassword()
+    {
+        return view('Profile/edit_password');
+    }
 }
