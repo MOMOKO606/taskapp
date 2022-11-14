@@ -53,4 +53,15 @@ class RememberedLoginModel extends \CodeIgniter\Model
             }
         }
     }
+
+
+    public function deleteByToken($token)
+    {
+        $token = new Token($token);
+
+        $token_hash = $token->getHash();
+
+        $this->where('token_hash', $token_hash)
+            ->delete();
+    }
 }

@@ -62,6 +62,18 @@ class Authentication
 
     public function logout()
     {
+        //  首先检查cookie
+        $token = service('request')->getCookie('remember_me');
+
+        if ($token !== null) {
+
+            $model = new \App\Models\RememberedLoginModel;
+            //  删除数据库中的token
+            $model->deleteByToken($token);
+        }
+        //  删除cookie
+        service('response')->deleteCookie('remember_me');
+        //  删除session
         session()->destroy();
     }
 
@@ -124,6 +136,10 @@ class Authentication
         }
 
         //  再查cookie
+        if ($this->user === null) {
+
+            $this->user = $this->getUserFromRememberCookie();
+        }
 
         return $this->user;
     }
