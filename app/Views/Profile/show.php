@@ -14,7 +14,9 @@
 
 <?php else: ?>
 <!--如果用户没传头像，则显示public/images/下的默认头像-->
-    <img src="<?= site_url('images/blank_profile.png') ?>" width="200" height="200" alt="profile image">
+<!--    <img src="--><?//= site_url('images/blank_profile.png') ?><!--" width="200" height="200" alt="profile image">-->
+    <!--如果用户没传头像，调用https://robohash.org/，根据用户名hash出一个随机头像-->
+    <img src="https://robohash.org/YOUR-TEXT.png" width="200" height="200" alt="profile image" >
 
 <?php endif; ?>
 

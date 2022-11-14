@@ -55,6 +55,7 @@ class Profileimage extends BaseController
             ->save($path);
 
         $user = service('auth')->getCurrentUser();
+        //  缺少一步check是否已经有头像，如果有请删除旧文件优化空间。
         //  找到文件名并把他存到user中
         $user->profile_image = $file->getName();
 
