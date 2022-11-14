@@ -35,9 +35,7 @@ class Authentication
 
         }
 
-        $session = session();
-        $session->regenerate();
-        $session->set('user_id', $user->id);
+        $this->logInUser($user);
 
         //  用户账号密码没问题，且选中了remember me，则我们要创建remember me的token
         if ($remember_me) {
@@ -67,7 +65,7 @@ class Authentication
         session()->destroy();
     }
 
-    public function getCurrentUser()
+    private function getUserFromSession()
     {
         if ( ! session()->has('user_id')) {
 
@@ -75,19 +73,66 @@ class Authentication
 
         }
 
-        if ($this->user === null) {
+        $model = new \App\Models\UserModel;
 
-            $model = new \App\Models\UserModel;
+        $user = $model->find(session()->get('user_id'));
 
-            $user = $model->find(session()->get('user_id'));
+        if ($user && $user->is_active) {
 
-            if ($user && $user->is_active) {
+            return $user;
+        }
+    }
 
-                $this->user = $user;
-            }
+    private function getUserFromRememberCookie()
+    {
+        $request = service('request');
+
+        $token = $request->getCookie('remember_me');
+
+        if ($token === null) {
+
+            return null;
         }
 
+        $remembered_login_model = new \App\Models\RememberedLoginModel;
+
+        $remembered_login = $remembered_login_model->findByToken($token);
+
+        if ($remembered_login === null) {
+
+            return null;
+        }
+
+        $user_model = new \App\Models\UserModel;
+
+        $user = $user_model->find($remembered_login['user_id']);
+
+        if ($user && $user->is_active) {
+
+            $this->logInUser($user);
+
+            return $user;
+        }
+    }
+
+    public function getCurrentUser()
+    {
+        //  先查session
+        if ($this->user === null) {
+
+            $this->user = $this->getUserFromSession();
+        }
+
+        //  再查cookie
+
         return $this->user;
+    }
+
+    private function logInUser($user)
+    {
+        $session = session();
+        $session->regenerate();
+        $session->set('user_id', $user->id);
     }
 
     public function isLoggedIn()
