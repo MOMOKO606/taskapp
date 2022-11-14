@@ -7,7 +7,7 @@ class Authentication
     // 初值为null的cache。
     private $user;
 
-    public function login($email, $password)
+    public function login($email, $password, $remember_me)
     {
         $model = new \App\Models\UserModel;
 
@@ -39,7 +39,21 @@ class Authentication
         $session->regenerate();
         $session->set('user_id', $user->id);
 
+        //  用户账号密码没问题，且选中了remember me，则我们要创建remember me的token
+        if ($remember_me) {
+
+            $this->rememberLogin($user->id);
+
+        }
+
         return true;
+    }
+
+    private function rememberLogin($user_id)
+    {
+        $model = new \App\Models\RememberedLoginModel;
+
+        $model->rememberUserLogin($user_id);
     }
 
     public function logout()

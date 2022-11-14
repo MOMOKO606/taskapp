@@ -13,10 +13,12 @@ class Login extends BaseController
     {
         $email = $this->request->getPost('email');
         $password = $this->request->getPost('password');
+        $remember_me = (bool)$this->request->getPost('remember_me');
+
 
         $auth = service("auth");
 
-        if ($auth -> login($email, $password)){
+        if ($auth -> login($email, $password, $remember_me)){
             //  从session中取得先前url, 如果值为空则取首页，存放在$redirect_url中
             $redirect_url = session('redirect_url') ?? '/';
             //  释放session中的url信息。
