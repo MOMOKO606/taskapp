@@ -25,7 +25,8 @@ class Login extends BaseController
             unset($_SESSION['redirect_url']);
             //  登录成功后跳转回$redirect_url
             return redirect()->to($redirect_url)
-                ->with('info', 'Login successful');
+                ->with('info', 'Login successful')
+                ->withCookies();
 
         }else{
             return redirect()->back()

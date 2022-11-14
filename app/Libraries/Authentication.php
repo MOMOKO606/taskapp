@@ -53,7 +53,13 @@ class Authentication
     {
         $model = new \App\Models\RememberedLoginModel;
 
-        $model->rememberUserLogin($user_id);
+        list($token, $expiry) = $model->rememberUserLogin($user_id);
+
+        //  把创建的remember me token发给用户cookie。
+        //  通过response helper类实现set cookie。
+        $response = service('response');
+
+        $response->setCookie('remember_me', $token, $expiry);
     }
 
     public function logout()

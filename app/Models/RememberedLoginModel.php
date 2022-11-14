@@ -25,7 +25,12 @@ class RememberedLoginModel extends \CodeIgniter\Model
             'user_id'    => $user_id,
             'expires_at' => date('Y-m-d H:i:s', $expiry)
         ];
-
+        //  这个function不仅把生成的remember login的token存入database。
         $this->insert($data);
+        // 而且返回token和expiry。
+        return [
+            $token->getValue(),
+            $expiry
+        ];
     }
 }
