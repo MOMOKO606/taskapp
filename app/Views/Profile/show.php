@@ -6,6 +6,16 @@
 
 <h1>Profile</h1>
 
+<?php if ($user->profile_image): ?>
+
+    <img src="<?= site_url('/profile/image') ?>" width="200" height="200" alt="profile image">
+
+<?php else: ?>
+<!--如果用户没传头像，则显示public/images/下的默认头像-->
+    <img src="<?= site_url('images/blank_profile.png') ?>" width="200" height="200" alt="profile image">
+
+<?php endif; ?>
+
 <dl>
     <dt>Name</dt>
     <dd><?= esc($user->name) ?></dd>

@@ -116,4 +116,23 @@ class Profile extends BaseController
                 ->with('warning', 'Invalid password');
         }
     }
+
+    //  专门用一个method来显示图片
+    public function getImage()
+    {
+        if ($this->user->profile_image) {
+
+            $path = WRITEPATH . 'uploads/profile_images/' . $this->user->profile_image;
+
+            $finfo = new \finfo(FILEINFO_MIME);
+
+            $type = $finfo->file($path);
+
+            header("Content-Type: $type");
+            header("Content-Length: " . filesize($path));
+
+            readfile($path);
+            exit;
+        }
+    }
 }

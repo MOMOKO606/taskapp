@@ -44,8 +44,28 @@ class Profileimage extends BaseController
             return redirect()->back()
                 ->with('warning', 'Invalid file format (PNG or JPEG only)');
         }
+        //  设定上传文件的上层文件夹名。
+        $path = $file->store('profile_images');
+        //  得到上传文件的完整路径。
+        $path = WRITEPATH . 'uploads/' . $path;
+        //  用image class调整图片大小。
+        service('image')
+            ->withFile($path)
+            ->fit(200, 200, 'center')
+            ->save($path);
 
-        echo $file->getClientName();
+        $user = service('auth')->getCurrentUser();
+        //  找到文件名并把他存到user中
+        $user->profile_image = $file->getName();
+
+        $model = new \App\Models\UserModel;
+        //  再把user更新到model中
+        //  如果不想添加model config中的allowedfields，则用临时禁用protect的方法。
+        $model->protect(false)
+            ->save($user);
+
+        return redirect()->to("/profile/show")
+            ->with('info', 'Image uploaded successfully');
     }
 }
 
