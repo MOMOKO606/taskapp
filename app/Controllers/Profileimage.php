@@ -67,6 +67,38 @@ class Profileimage extends BaseController
         return redirect()->to("/profile/show")
             ->with('info', 'Image uploaded successfully');
     }
+
+    //  从show点击delete，跳转到前端确认界面。
+    public function getDelete()
+    {
+        return view('Profileimage/delete');
+    }
+
+    //  前端确认删除 / 取消，做相应处理并跳转回来。
+    public function postDelete()
+    {
+        if ($this->request->getMethod() === 'post') {
+
+            $user = service('auth')->getCurrentUser();
+
+            $path = WRITEPATH . 'uploads/profile_images/' . $user->profile_image;
+
+            if (is_file($path)) {
+
+                unlink($path);
+            }
+
+            $user->profile_image = null;
+
+            $model = new \App\Models\UserModel;
+
+            $model->protect(false)
+                ->save($user);
+
+            return redirect()->to('/profile/show')
+                ->with('info', 'Image deleted');
+        }
+    }
 }
 
 
