@@ -123,6 +123,15 @@ class Tasks extends BaseController
             ->with('info', 'Task deleted');
     }
 
+    public function getSearch()
+    {   //  调用taskmodel中的函数来搜索task
+        $tasks = $this->model->search($this->request->getGet('q'), $this->current_user->id);
+        //  将查到的结果返回为JSON
+        return $this->response->setJSON($tasks);
+
+
+    }
+
 
     private function getTaskOr404($id)
     {
