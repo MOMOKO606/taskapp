@@ -1,28 +1,29 @@
-<div>
-    <label for="name">Name</label>
+<div class="field">
+    <label class="label" for="name">Name</label>
     <!--old()表示上次输入的表单， esc()表示过滤掉含有代码的危险输入。    -->
-    <input type="text" name="name" id="name" value="<?= old('name', esc($user->name)) ?>">
+    <input class="input" type="text" name="name" id="name" value="<?= old('name', esc($user->name)) ?>">
 </div>
 
-<div>
-    <label for="email">email</label>
-    <input type="text" name="email" id="email" value="<?= old('email', esc($user->email)) ?>">
+<div class="field">
+    <label class="label" for="email">email</label>
+    <input class="input" type="text" name="email" id="email" value="<?= old('email', esc($user->email)) ?>">
 </div>
 
-<div>
-    <label for="password">Password</label>
-    <input type="password" name="password">
+<div class="field">
+    <label class="label" for="password">Password</label>
+    <input class="input" type="password" name="password">
     <?php if ($user->id): ?>
-        <p>Leave blank to keep existing password</p>
+        <p class="help">Leave blank to keep existing password</p>
     <?php endif; ?>
 </div>
 
-<div>
-    <label for="password_confirmation">Repeat password</label>
-    <input type="password" name="password_confirmation">
+<div class="field">
+    <label class="label" for="password_confirmation">Repeat password</label>
+    <input class="input" type="password" name="password_confirmation">
 </div>
-<div>
-    <label for="is_active">
+
+<div class="field">
+    <label class="checkbox" for="is_active">
         <?php if ($user->id == current_user()->id): ?>
             <input type="checkbox" checked disabled> active
 
@@ -35,8 +36,9 @@
         <?php endif; ?>
     </label>
 </div>
-<div>
-    <label for="is_admin">
+
+<div class="field">
+    <label class="checkbox" for="is_admin">
         <?php if ($user->id == current_user()->id): ?>
             <input type="checkbox" checked disabled> administrator
 
@@ -49,6 +51,7 @@
         <?php endif; ?>
     </label>
 </div>
+
 
 
 
