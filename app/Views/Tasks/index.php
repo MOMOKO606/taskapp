@@ -4,15 +4,14 @@
 
 <?= $this->section("content") ?>
 
-    <h1>Tasks</h1>
+    <h1 class="title">Tasks</h1>
 
-    <a href="<?= site_url("/tasks/new") ?>">New task</a>
+    <a class="button" href="<?= site_url("/tasks/new") ?>">New task</a>
 
     <div>
         <label for="query">Search</label>
         <input name="query" id="query">
     </div>
-
 
 <?php if ($tasks): ?>
 
@@ -27,59 +26,60 @@
 
         <?php endforeach; ?>
     </ul>
-    <?= $pager->links()?>
+
+    <?= $pager->simpleLinks() ?>
 
 <?php else: ?>
 
     <p>No tasks found.</p>
 
 <?php endif; ?>
-<script src="<?= base_url('/js/auto-complete.min.js') ?>"></script>
 
-<script>
-    var searchUrl = "<?= site_url('/tasks/search?q=') ?>";
-    var showUrl = "<?= site_url('/tasks/show/') ?>";
-    var data;
-    var i;
+    <script src="<?= site_url('/js/auto-complete.min.js') ?>"></script>
 
-    var searchAutoComplete = new autoComplete({
-        selector: 'input[name="query"]',
-        cache: false,
-        source: function(term, response) {
+    <script>
+        var searchUrl = "<?= site_url('/tasks/search?q=') ?>";
+        var showUrl = "<?= site_url('/tasks/show/') ?>";
+        var data;
+        var i;
 
-            var request = new XMLHttpRequest();
+        var searchAutoComplete = new autoComplete({
+            selector: 'input[name="query"]',
+            cache: false,
+            source: function(term, response) {
 
-            request.open('GET', searchUrl + term, true);
+                var request = new XMLHttpRequest();
 
-            request.onload = function() {
+                request.open('GET', searchUrl + term, true);
 
-                data = JSON.parse(this.response);
+                request.onload = function() {
 
-                i = 0;
+                    data = JSON.parse(this.response);
 
-                var suggestions = data.map(task => task.description);
+                    i = 0;
 
-                response(suggestions);
-            };
+                    var suggestions = data.map(task => task.description);
 
-            request.send();
-        },
-        renderItem: function (item, search) {
+                    response(suggestions);
+                };
 
-            var id = data[i].id;
+                request.send();
+            },
+            renderItem: function (item, search) {
 
-            i++;
+                var id = data[i].id;
 
-            return '<div class="autocomplete-suggestion" data-id="' + id + '">' + item + '</div>';
-        },
-        onSelect: function(e, term, item){
+                i++;
 
-            window.location.href = showUrl + item.getAttribute('data-id');
+                return '<div class="autocomplete-suggestion" data-id="' + id + '">' + item + '</div>';
+            },
+            onSelect: function(e, term, item){
 
-        }
-    });
+                window.location.href = showUrl + item.getAttribute('data-id');
 
-</script>
+            }
+        });
 
+    </script>
 
 <?= $this->endSection() ?>

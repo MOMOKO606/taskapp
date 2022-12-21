@@ -4,13 +4,15 @@
 
 <?= $this->section('content') ?>
 
-<h1>Profile</h1>
+<h1 class="title">Profile</h1>
 
 <?php if ($user->profile_image): ?>
 
     <img src="<?= site_url('/profile/image') ?>" width="200" height="200" alt="profile image">
 
-    <a href="<?= site_url('/profileimage/delete') ?>">Delete profile image</a>
+    <div>
+        <a class="button is-danger is-light" href="<?= site_url('/profileimage/delete') ?>">Delete profile image</a>
+    </div>
 
 <?php else: ?>
 <!--如果用户没传头像，则显示public/images/下的默认头像-->
@@ -28,10 +30,10 @@
     <dd><?= esc($user->email) ?></dd>
 </dl>
 
-<a href="<?= site_url("/profile/edit") ?>">Edit</a>
+<a class="button is-link" href="<?= site_url("/profile/edit") ?>">Edit</a>
 
-<a href="<?= site_url("/profile/editpassword") ?>">Change password</a>
+<a class="button is-link" href="<?= site_url("/profile/editpassword") ?>">Change password</a>
 
-<a href="<?= site_url("/profileimage/edit") ?>">Change profile image</a>
+<a class="button is-link" href="<?= site_url("/profileimage/edit") ?>">Change profile image</a>
 
 <?= $this->endSection() ?>
