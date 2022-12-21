@@ -22,13 +22,16 @@
 
 <?php endif; ?>
 
-<dl>
-    <dt>Name</dt>
-    <dd><?= esc($user->name) ?></dd>
+<div class="content">
 
-    <dt>email</dt>
-    <dd><?= esc($user->email) ?></dd>
-</dl>
+    <dl>
+        <dt class="has-text-weight-bold">Name</dt>
+        <dd><?= esc($user->name) ?></dd>
+
+        <dt class="has-text-weight-bold">email</dt>
+        <dd><?= esc($user->email) ?></dd>
+    </dl>
+</div>
 
 <a class="button is-link" href="<?= site_url("/profile/edit") ?>">Edit</a>
 
