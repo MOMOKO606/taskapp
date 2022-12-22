@@ -24,11 +24,11 @@ class UserModel extends \CodeIgniter\Model
 
     protected $validationMessages = [
         'email' => [
-            'is_unique' => 'That email address is taken'
+            'is_unique' => 'User.email.is_unique'
         ],
         'password_confirmation' => [
-            'required' => 'Please confirm the password',
-            'matches' => 'Please enter the same password again'
+            'required' => 'User.password_confirmation.required',
+            'matches' => 'User.password_confirmation.matches'
         ]
     ];
 

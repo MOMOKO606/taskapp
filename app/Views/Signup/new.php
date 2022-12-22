@@ -16,7 +16,7 @@
 
 <div class="container">
 
-    <?= form_open("/signup") ?>
+    <?= form_open("/$locale/signup") ?>
 
     <div class="field">
         <label class="label" for="name"><?= lang('Signup.name') ?></label>
