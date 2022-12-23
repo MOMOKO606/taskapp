@@ -39,13 +39,17 @@ $routes->setAutoRoute(true);
 $routes->get('/', 'Home::index');
 $routes->get('/testemail', 'Home::getTestemail');
 
-$routes->get('{locale}/signup', 'Signup::getNew', ['filter' => 'guest']);
-$routes->get('{locale}/signup/success', 'Signup::getSuccess', ['filter' => 'guest']);
-$routes->get('{locale}/signup/activate/(:alphanum)', 'Signup::getActivate/$1');
+$routes->group('{locale}', function($routes) {
+    $routes->get('signup', 'Signup::getNew', ['filter' => 'guest']);
+    $routes->post('signup', 'Signup::postCreate', ['filter' => 'guest']);
+    $routes->get('signup/success', 'Signup::getSuccess', ['filter' => 'guest']);
+    $routes->get('signup/activate/(:alphanum)', 'Signup::getActivate/$1');
+});
+
 
 //  当get需要传入参数时的route设置。
 $routes->get('/signup/activate/(:any)', 'Signup::getActivate/$1');
-$routes->post('{locale}/signup', 'Signup::postCreate', ['filter' => 'guest']);
+
 
 $routes->get('/login', 'Login::getNew', ['filter' => 'guest']);
 $routes->post('/login', 'Login::postCreate');

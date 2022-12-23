@@ -44,7 +44,7 @@
 
                 <?php else: ?>
 
-                    <a class="navbar-item" href="<?= site_url("/signup") ?>">Sign up</a>
+                    <a class="navbar-item" href="<?= site_url("/$locale/signup") ?>">Sign up</a>
 
                     <a class="navbar-item" href="<?= site_url("/login") ?>">Log in</a>
 
