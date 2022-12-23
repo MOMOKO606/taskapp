@@ -14,6 +14,8 @@ class Home extends BaseController
 
         $this->request->setLocale($locale);
 
+        session()->set('locale', $locale);
+
         return view("Home/index");
     }
 

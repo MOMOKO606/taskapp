@@ -46,10 +46,23 @@ abstract class BaseController extends Controller
         // Do Not Edit This Line
         parent::initController($request, $response, $logger);
 
-        $this->locale = $request->getLocale();
+        $session = session();
+
+        if ($session->has('locale')) {
+
+            $this->locale = $session->get('locale');
+
+        } else {
+
+            $this->locale = $request->getLocale();
+
+        }
+
+        $request->setLocale($this->locale);
 
         $view = service('renderer');
         $view->setVar('locale', $this->locale);
+
 
 
         // Preload any models, libraries, etc, here.
