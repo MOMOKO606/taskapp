@@ -1,5 +1,6 @@
-<h1>Password reset</h1>
+<h1><?= lang('Password.title_reset') ?></h1>
 
-<p>Please click on the link below to reset your password:</p>
+<p><?= lang('Password.reset_email_body') ?>:</p>
 
-<p><a href="<?= site_url("/password/reset/$token") ?>">Reset password</a></p>
+<p><a href="<?= site_url("/$locale/password/reset/$token") ?>"><?= lang('Password.reset_password') ?></a></p>
+

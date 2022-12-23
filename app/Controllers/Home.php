@@ -4,10 +4,10 @@ namespace App\Controllers;
 
 class Home extends BaseController
 {
-    public function index()
+    public function index($locale = '')
     {
+        $this->request->setLocale($locale);
         return view("Home/index");
-//        return view('welcome_message');
     }
 
 

@@ -8,31 +8,31 @@
 
     <div class="container">
 
-        <?= form_open("/login") ?>
+        <?= form_open("/$locale/login") ?>
 
         <div class="field">
-            <label class="label" for="email">email</label>
+            <label class="label" for="email"><?= lang('Login.email') ?></label>
             <input class="input" type="text" name="email" id="email" value="<?= old('email') ?>">
         </div>
 
         <div class="field">
-            <label class="label" for="password">Password</label>
+            <label class="label" for="password"><?= lang('Login.password') ?></label>
             <input class="input" type="password" name="password">
         </div>
 
         <div class="field">
             <label class="checkbox" for="remember_me">
                 <input type="checkbox" id="remember_me" name="remember_me"
-                       <?php if (old('remember_me')): ?>checked<?php endif; ?>> remember me
+                       <?php if (old('remember_me')): ?>checked<?php endif; ?>> <?= lang('Login.remember_me') ?>
             </label>
         </div>
 
         <div class="field is-grouped">
             <div class="control">
-                <button class="button is-primary">Log in</button>
+                <button class="button is-primary"><?= lang('Login.log_in') ?></button>
             </div>
 
-            <a href="<?= site_url("/password/forgot") ?>">Forgot password?</a>
+            <a href="<?= site_url("/$locale/password/forgot") ?>"><?= lang('Login.forgot_password') ?></a>
         </div>
 
         </form>

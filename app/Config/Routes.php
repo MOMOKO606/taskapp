@@ -37,25 +37,37 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
-$routes->get('/testemail', 'Home::getTestemail');
+$routes->get('([a-z]{2})', 'Home::index/$1');
 
-$routes->group('{locale}', function($routes) {
-    $routes->get('signup', 'Signup::getNew', ['filter' => 'guest']);
-    $routes->post('signup', 'Signup::postCreate', ['filter' => 'guest']);
-    $routes->get('signup/success', 'Signup::getSuccess', ['filter' => 'guest']);
-    $routes->get('signup/activate/(:alphanum)', 'Signup::getActivate/$1');
+
+$routes->group('{locale}', ['filter' => 'guest'], function($routes) {
+        $routes->get('signup', 'Signup::getNew');
+        $routes->post('signup', 'Signup::postCreate');
+        $routes->get('signup/success', 'Signup::getSuccess');
+        $routes->get('signup/activate/(:alphanum)', 'Signup::getActivate/$1');
+
+    //  当get需要传入参数时的route设置。
+    $routes->get('login', 'Login::getNew');
+    $routes->post('login', 'Login::postCreate');
+    $routes->get('password/forgot', 'Password::getForgot');
+    $routes->post('password/processforgot', 'Password::postProcessForgot');
+    $routes->get('password/resetsent', 'Password::getResetSent');
+    $routes->get('password/reset/(:alphanum)', 'Password::getReset/$1');
+    $routes->post('password/processreset/(:alphanum)', 'Password::postProcessReset/$1');
+    $routes->get('password/resetsuccess', 'Password::getResetSuccess');
 });
-
-
-//  当get需要传入参数时的route设置。
-$routes->get('/signup/activate/(:any)', 'Signup::getActivate/$1');
-
-
-$routes->get('/login', 'Login::getNew', ['filter' => 'guest']);
-$routes->post('/login', 'Login::postCreate');
 
 $routes->get('/logout', 'Login::getDelete');
 $routes->get('/showLogoutMessage', 'Login::getShowLogoutMessage');
+
+
+
+
+
+
+
+
+
 
 
 

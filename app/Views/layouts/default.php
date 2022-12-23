@@ -20,7 +20,7 @@
 
             <div class="navbar-start">
 
-                <a class="navbar-item" href="<?= site_url("/") ?>">Home</a>
+                <a class="navbar-item" href="<?= site_url("/") ?>"><?= lang('App.nav.home') ?></a>
 
             </div>
 
@@ -28,25 +28,25 @@
 
                 <?php if (current_user()): ?>
 
-                    <div class="navbar-item">Hello <?= esc(current_user()->name) ?></div>
+                    <div class="navbar-item"><?= lang('App.nav.hello') ?>, <?= esc(current_user()->name) ?></div>
 
-                    <a class="navbar-item" href="<?= site_url("/profile/show") ?>">Profile</a>
+                    <a class="navbar-item" href="<?= site_url("/profile/show") ?>"><?= lang('App.nav.profile') ?></a>
 
                     <?php if (current_user()->is_admin): ?>
 
-                        <a class="navbar-item" href="<?= site_url("/admin/users") ?>">Users</a>
+                        <a class="navbar-item" href="<?= site_url("/admin/users") ?>"><?= lang('App.nav.users') ?></a>
 
                     <?php endif; ?>
 
-                    <a class="navbar-item" href="<?= site_url("/tasks") ?>">Tasks</a>
+                    <a class="navbar-item" href="<?= site_url("/tasks") ?>"><?= lang('App.nav.tasks') ?></a>
 
-                    <a class="navbar-item" href="<?= site_url("/logout") ?>">Log out</a>
+                    <a class="navbar-item" href="<?= site_url("/logout") ?>"><?= lang('App.nav.logout') ?></a>
 
                 <?php else: ?>
 
-                    <a class="navbar-item" href="<?= site_url("/$locale/signup") ?>">Sign up</a>
+                    <a class="navbar-item" href="<?= site_url("/$locale/signup") ?>"><?= lang('App.nav.signup') ?></a>
 
-                    <a class="navbar-item" href="<?= site_url("/login") ?>">Log in</a>
+                    <a class="navbar-item" href="<?= site_url("/$locale/login") ?>"><?= lang('App.nav.login') ?></a>
 
                 <?php endif; ?>
 
