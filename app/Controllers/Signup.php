@@ -28,7 +28,7 @@ class Signup extends BaseController{
             // 注意习惯，一般post完之后都喜欢跳转到另一界面。
             // 如果直接return到view，则你的url不会发生跳转，是不变的。
             // 而先return到controller再，从controller跳到view，则url会跳转。
-            return redirect() -> to("/signup/success");
+            return redirect() -> to("/{$this->locale}/signup/success");
 
         } else {
 
@@ -49,7 +49,7 @@ class Signup extends BaseController{
 
         $email->setTo($user->email);
 
-        $email->setSubject('Account activation');
+        $email->setSubject(lang('Signup.activation'));
 
         //  即发出的邮件内容是个html文件，存放在views/Signup/activation_email
         $message = view('Signup/activation_email', [

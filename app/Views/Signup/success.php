@@ -1,11 +1,11 @@
 <?= $this->extend('layouts/default') ?>
 
-<?= $this->section('title') ?>Signup<?= $this->endSection() ?>
+<?= $this->section('title') ?><?= lang('Signup.title') ?><?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
 
-<h1>Signup</h1>
+<h1><?= lang('Signup.title') ?></h1>
 
-<p>Signup successful.</p>
+<p><?= lang('Signup.successful') ?></p>
 
 <?= $this->endSection() ?>
