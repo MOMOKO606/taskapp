@@ -41,6 +41,7 @@ $routes->get('/testemail', 'Home::getTestemail');
 
 $routes->get('{locale}/signup', 'Signup::getNew', ['filter' => 'guest']);
 $routes->get('{locale}/signup/success', 'Signup::getSuccess', ['filter' => 'guest']);
+$routes->get('{locale}/signup/activate/(:alphanum)', 'Signup::getActivate/$1');
 
 //  当get需要传入参数时的route设置。
 $routes->get('/signup/activate/(:any)', 'Signup::getActivate/$1');

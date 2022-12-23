@@ -12,4 +12,5 @@ return [
     'activation' => '帐户激活',
     'activation_message' => '请点击下方链接激活你的帐户:',
     'activate_link' => '激活帐户',
+    'activation_success' => '帐户激活成功！',
 ];

@@ -12,4 +12,5 @@ return [
     'activation' => 'Account activation',
     'activation_message' => 'Please click on the link below to activate your account:',
     'activate_link' => 'Activate account',
+    'activation_success' => 'Account activation successful',
 ];
