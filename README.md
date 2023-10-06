@@ -1,4 +1,4 @@
-# A Demo Web application with the CodeIgniter 4
+# A demo web application with the CodeIgniter 4
 
 This is a concise but enterprise-level web application demo that is quite similar to the project I have done for the ZiHan Art Studio Portal & Management system.
 The Demo's core features include:
