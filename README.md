@@ -10,5 +10,6 @@ The Demo's core features include:
 * File uploads and image processing
 * Create, Read, Update, Delete (CRUD) for database records
 * The whole codebase focuses on decoupling and maintainability between modules
-  
+
+As CodeIgniter is a completely new PHP MVC framework to me, I am learning and simultaneously creating this demo. I am striving to adhere to industry standards and best practices throughout the process. During this period, I have referenced the official CodeIgniter manual, as well as many instructional videos on Udemy and YouTube.
 
